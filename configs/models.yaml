@@ -1,0 +1,207 @@
+# Model experiment configuration (Component B).
+# All tuning, resampling and calibration use the TRAINING partition only (5-fold CV).
+# Model, strategy, calibration and threshold selection use the VALIDATION partition.
+# The test set is not touched here.
+
+experiment:
+  name: "credit-risk-models"
+  random_seed: 42
+  cv_folds: 5
+  # Average precision (PR-AUC) drives hyperparameter search: threshold-free and focused on
+  # the default class. ROC-AUC and Brier score are also cross-validated for every model.
+  tuning_scoring: "average_precision"
+  n_jobs: -1
+
+threshold:
+  # Rule 1: maximise F-beta on validation (beta = 2 weights recall more than precision).
+  beta: 2.0
+  # Rule 2: same objective, flagging at most this share of clients (capacity constraint).
+  # 30% is an illustrative operating assumption, not a regulatory or business figure.
+  max_flagged_rate: 0.30
+
+bootstrap:
+  n_resamples: 1000
+  confidence: 0.95
+
+tracking:
+  mlflow_enabled: true
+  mlflow_tracking_uri: "sqlite:///mlflow.db"
+
+outputs:
+  metrics_dir: "artifacts/metrics"
+  models_dir: "artifacts/models"
+  predictions_dir: "artifacts/predictions"
+
+# Pre-declared selection rule (src/credit_risk/selection.py), written to selection.json
+selection:
+  max_ece: 0.03
+  max_mean_pd_gap: 0.02
+
+# Paired bootstrap comparisons (A - B) on validation, written to comparisons.json
+comparisons:
+  - [logreg, logreg_raw]
+  - [logreg, dummy_prior]
+  - [xgboost, logreg]
+  - [xgboost, random_forest]
+  - [logreg, logreg_balanced]
+  - [xgboost, xgboost_weighted]
+  - [xgboost, xgboost_smotenc]
+  - [xgboost, xgboost_random_undersampling]
+  - [xgboost, xgboost_smotenc_enn]
+  - [xgboost, balanced_random_forest]
+  - [xgboost__isotonic, xgboost]
+  - [xgboost__sigmoid, xgboost]
+  - [logreg__isotonic, logreg]
+
+models:
+  # ---------------------------------------------------------------- Stage 1: model families
+  dummy_prior:
+    description: "Predicts the training default rate for every client (no-skill baseline)."
+    estimator: dummy
+    preprocessor: linear
+    features: {add_features: false}
+    params: {strategy: prior}
+
+  logreg_raw:
+    description: "L2 logistic regression on the original 23 variables (codes merged)."
+    estimator: logistic_regression
+    preprocessor: linear
+    features: {add_features: false}
+    params: {max_iter: 5000}
+    search: {C: [0.001, 0.01, 0.1, 1.0, 10.0]}
+
+  logreg:
+    description: "L2 logistic regression on original + engineered features."
+    estimator: logistic_regression
+    preprocessor: linear
+    features: {add_features: true}
+    params: {max_iter: 5000}
+    search: {C: [0.001, 0.01, 0.1, 1.0, 10.0]}
+
+  random_forest:
+    description: "Random forest on original + engineered features."
+    estimator: random_forest
+    preprocessor: tree
+    features: {add_features: true}
+    params: {n_estimators: 300, n_jobs: 1}
+    search_type: random
+    n_iter: 12
+    search:
+      max_depth: [8, 12, 16, 24, null]
+      min_samples_leaf: [1, 5, 10, 20, 50]
+      max_features: ["sqrt", 0.2, 0.33, 0.5]
+
+  xgboost:
+    description: "Gradient-boosted trees (XGBoost, hist) on original + engineered features."
+    estimator: xgboost
+    preprocessor: tree
+    features: {add_features: true}
+    params: {n_jobs: 1}
+    search_type: random
+    n_iter: 30
+    search:
+      n_estimators: [200, 400, 600, 800]
+      learning_rate: [0.02, 0.03, 0.05, 0.1]
+      max_depth: [2, 3, 4, 5, 6]
+      min_child_weight: [1, 3, 5, 10, 20]
+      subsample: [0.7, 0.8, 0.9, 1.0]
+      colsample_bytree: [0.5, 0.7, 0.9, 1.0]
+      reg_lambda: [1, 3, 10]
+      gamma: [0, 0.5, 1]
+
+  # ---------------------------------------------------- Stage 2: class-imbalance strategies
+  # Each variant inherits the tuned configuration of its base model; only the strategy changes.
+
+  # Cost-sensitive learning (class weights)
+  logreg_balanced:
+    inherit: logreg
+    description: "logreg with class_weight='balanced' (w_c = N / (K N_c))."
+    params: {class_weight: balanced}
+  random_forest_weighted:
+    inherit: random_forest
+    description: "Random forest with class_weight='balanced_subsample'."
+    params: {class_weight: balanced_subsample}
+  xgboost_weighted:
+    inherit: xgboost
+    description: "XGBoost with scale_pos_weight = N_negative / N_positive (training set)."
+    params: {scale_pos_weight: 3.52}
+
+  # Oversampling
+  logreg_random_oversampling:
+    inherit: logreg
+    sampler: {name: random_oversampling}
+  logreg_smotenc:
+    inherit: logreg
+    sampler: {name: smotenc}
+  xgboost_random_oversampling:
+    inherit: xgboost
+    sampler: {name: random_oversampling}
+  xgboost_smotenc:
+    inherit: xgboost
+    sampler: {name: smotenc}
+
+  # Undersampling and cleaning
+  logreg_random_undersampling:
+    inherit: logreg
+    sampler: {name: random_undersampling}
+  logreg_tomek_links:
+    inherit: logreg
+    sampler: {name: tomek_links}
+  logreg_edited_nearest_neighbours:
+    inherit: logreg
+    sampler: {name: edited_nearest_neighbours}
+  xgboost_random_undersampling:
+    inherit: xgboost
+    sampler: {name: random_undersampling}
+  xgboost_tomek_links:
+    inherit: xgboost
+    sampler: {name: tomek_links}
+  xgboost_edited_nearest_neighbours:
+    inherit: xgboost
+    sampler: {name: edited_nearest_neighbours}
+
+  # Hybrid
+  logreg_smotenc_tomek:
+    inherit: logreg
+    sampler: {name: smotenc_tomek}
+  logreg_smotenc_enn:
+    inherit: logreg
+    sampler: {name: smotenc_enn}
+  xgboost_smotenc_tomek:
+    inherit: xgboost
+    sampler: {name: smotenc_tomek}
+  xgboost_smotenc_enn:
+    inherit: xgboost
+    sampler: {name: smotenc_enn}
+
+  # Imbalance-aware ensembles
+  balanced_random_forest:
+    inherit: random_forest
+    description: "Balanced random forest: each tree is grown on a balanced bootstrap sample."
+    estimator: balanced_random_forest
+    params: {sampling_strategy: all, replacement: true, bootstrap: false}
+  easy_ensemble:
+    description: "EasyEnsemble: AdaBoost learners on balanced random under-samples."
+    estimator: easy_ensemble
+    preprocessor: tree
+    features: {add_features: true}
+    params: {n_estimators: 10, n_jobs: 1}
+  rusboost:
+    description: "RUSBoost: AdaBoost with random under-sampling at each round (depth-3 trees)."
+    estimator: rusboost
+    preprocessor: tree
+    features: {add_features: true}
+    params: {n_estimators: 300, learning_rate: 0.05, base_max_depth: 3}
+
+  # -------------------------------------------------- Stage 3: probability calibration
+  # Calibration maps fitted on out-of-fold training scores (see calibration.py).
+  logreg__sigmoid: {inherit: logreg, calibration: sigmoid}
+  logreg__isotonic: {inherit: logreg, calibration: isotonic}
+  random_forest__sigmoid: {inherit: random_forest, calibration: sigmoid}
+  random_forest__isotonic: {inherit: random_forest, calibration: isotonic}
+  xgboost__sigmoid: {inherit: xgboost, calibration: sigmoid}
+  xgboost__isotonic: {inherit: xgboost, calibration: isotonic}
+  # Resampled / weighted models must be recalibrated before their scores are used as PDs.
+  xgboost_weighted__isotonic: {inherit: xgboost_weighted, calibration: isotonic}
+  xgboost_smotenc__isotonic: {inherit: xgboost_smotenc, calibration: isotonic}
+  balanced_random_forest__isotonic: {inherit: balanced_random_forest, calibration: isotonic}

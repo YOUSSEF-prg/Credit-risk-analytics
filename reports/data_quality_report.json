@@ -1,0 +1,129 @@
+{
+  "n_rows": 30000,
+  "n_columns": 25,
+  "n_features": 23,
+  "missing_values_total": 0,
+  "id_unique": true,
+  "target": {
+    "name": "default_next_month",
+    "default_rate": 0.2212,
+    "counts": {
+      "0": 23364,
+      "1": 6636
+    }
+  },
+  "undocumented_codes": {
+    "SEX": {},
+    "EDUCATION": {
+      "0": 14,
+      "5": 280,
+      "6": 51
+    },
+    "MARRIAGE": {
+      "0": 54
+    },
+    "PAY_1": {
+      "-2": 2759,
+      "0": 14737
+    },
+    "PAY_2": {
+      "-2": 3782,
+      "0": 15730
+    },
+    "PAY_3": {
+      "-2": 4085,
+      "0": 15764
+    },
+    "PAY_4": {
+      "-2": 4348,
+      "0": 16455
+    },
+    "PAY_5": {
+      "-2": 4546,
+      "0": 16947
+    },
+    "PAY_6": {
+      "-2": 4895,
+      "0": 16286
+    }
+  },
+  "rows_with_undocumented_demographic_code": 399,
+  "negative_bill_amounts": {
+    "BILL_AMT1": 590,
+    "BILL_AMT2": 669,
+    "BILL_AMT3": 655,
+    "BILL_AMT4": 675,
+    "BILL_AMT5": 655,
+    "BILL_AMT6": 688
+  },
+  "negative_payment_amounts": {
+    "PAY_AMT1": 0,
+    "PAY_AMT2": 0,
+    "PAY_AMT3": 0,
+    "PAY_AMT4": 0,
+    "PAY_AMT5": 0,
+    "PAY_AMT6": 0
+  },
+  "inactive_accounts_all_zero_bills_and_payments": 795,
+  "duplicate_feature_rows_excluding_id": 56,
+  "duplicate_feature_groups_with_conflicting_target": 21,
+  "ranges": {
+    "LIMIT_BAL": {
+      "min": 10000,
+      "max": 1000000
+    },
+    "AGE": {
+      "min": 21,
+      "max": 79
+    },
+    "BILL_AMT1": {
+      "min": -165580,
+      "max": 964511
+    },
+    "BILL_AMT2": {
+      "min": -69777,
+      "max": 983931
+    },
+    "BILL_AMT3": {
+      "min": -157264,
+      "max": 1664089
+    },
+    "BILL_AMT4": {
+      "min": -170000,
+      "max": 891586
+    },
+    "BILL_AMT5": {
+      "min": -81334,
+      "max": 927171
+    },
+    "BILL_AMT6": {
+      "min": -339603,
+      "max": 961664
+    },
+    "PAY_AMT1": {
+      "min": 0,
+      "max": 873552
+    },
+    "PAY_AMT2": {
+      "min": 0,
+      "max": 1684259
+    },
+    "PAY_AMT3": {
+      "min": 0,
+      "max": 896040
+    },
+    "PAY_AMT4": {
+      "min": 0,
+      "max": 621000
+    },
+    "PAY_AMT5": {
+      "min": 0,
+      "max": 426529
+    },
+    "PAY_AMT6": {
+      "min": 0,
+      "max": 528666
+    }
+  },
+  "bill_exceeds_limit_rows": 3931
+}

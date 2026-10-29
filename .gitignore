@@ -1,0 +1,39 @@
+# Raw data is not redistributed; download it from UCI (see README)
+data/raw/*
+!data/raw/.gitkeep
+*.xls
+*.xlsx
+
+# Large or regenerable outputs
+artifacts/models/*
+!artifacts/models/.gitkeep
+mlruns/
+mlartifacts/
+mlflow.db
+chroma_db/
+knowledge_base/sources/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# Environments and secrets
+.venv/
+venv/
+env/
+.env
+*.env
+.streamlit/secrets.toml
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

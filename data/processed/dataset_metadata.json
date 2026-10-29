@@ -1,0 +1,68 @@
+{
+  "dataset": {
+    "name": "Default of Credit Card Clients",
+    "uci_id": 350,
+    "source_url": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+    "doi": "10.24432/C55S3H",
+    "license": "CC BY 4.0"
+  },
+  "raw_file": {
+    "path": "data/raw/default of credit card clients.xls",
+    "sha256": "30c6be3abd8dcfd3e6096c828bad8c2f011238620f5369220bd60cfc82700933",
+    "size_bytes": 5539328,
+    "local_modified_utc": "2026-10-29T16:51:19.351948+00:00"
+  },
+  "features": [
+    "LIMIT_BAL",
+    "SEX",
+    "EDUCATION",
+    "MARRIAGE",
+    "AGE",
+    "PAY_1",
+    "PAY_2",
+    "PAY_3",
+    "PAY_4",
+    "PAY_5",
+    "PAY_6",
+    "BILL_AMT1",
+    "BILL_AMT2",
+    "BILL_AMT3",
+    "BILL_AMT4",
+    "BILL_AMT5",
+    "BILL_AMT6",
+    "PAY_AMT1",
+    "PAY_AMT2",
+    "PAY_AMT3",
+    "PAY_AMT4",
+    "PAY_AMT5",
+    "PAY_AMT6"
+  ],
+  "excluded_columns": [
+    "ID"
+  ],
+  "target": "default_next_month",
+  "split": {
+    "random_seed": 42,
+    "fractions": {
+      "train": 0.6,
+      "validation": 0.2,
+      "test": 0.2
+    },
+    "sizes": {
+      "train": 18000,
+      "validation": 6000,
+      "test": 6000
+    },
+    "default_rate": {
+      "train": 0.2212222222222222,
+      "validation": 0.22116666666666668,
+      "test": 0.22116666666666668
+    }
+  },
+  "environment": {
+    "python": "3.12.16",
+    "pandas": "3.1.0",
+    "scikit_learn": "1.9.1"
+  },
+  "generated_utc": "2026-10-29T17:20:42+00:00"
+}

@@ -1,0 +1,33 @@
+# Runtime and development dependencies for all phases.
+# Lower bounds are tested versions; a fully pinned lock file (requirements-lock.txt)
+# is produced from the working environment in Phase 7.
+
+# Data and modelling
+pandas>=2.2
+numpy>=1.26
+scipy>=1.12
+scikit-learn>=1.5
+xgboost>=2.1
+imbalanced-learn>=0.14  # resampling strategies and imbalance-aware ensembles
+python-calamine>=0.2   # reads the original .xls file (pandas engine="calamine")
+pyyaml>=6.0
+joblib>=1.4
+
+# Visualisation and explainability
+matplotlib>=3.8
+plotly>=5.22
+shap>=0.46
+
+# Experiment tracking and dashboard
+mlflow>=2.14
+streamlit>=1.36
+
+# HTTP client (Ollama checks); the RAG dependencies are added with the RAG code
+requests>=2.32
+
+# Notebooks and quality
+jupyter>=1.0
+ipykernel>=6.29
+nbconvert>=7.16
+pytest>=8.2
+ruff>=0.5

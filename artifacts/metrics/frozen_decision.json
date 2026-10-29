@@ -1,0 +1,26 @@
+{
+  "frozen_utc": "2026-10-29T21:37:02+00:00",
+  "selected_model": "xgboost",
+  "selection_rule": {
+    "eligibility": "ECE <= 0.03 and |mean PD - observed rate| <= 0.02",
+    "primary": "highest validation PR-AUC among eligible models",
+    "parsimony": "simplest model whose PR-AUC is not significantly below the best (paired bootstrap, 95%)"
+  },
+  "thresholds": {
+    "f2_unconstrained": 0.135,
+    "f2_capacity_30pct": 0.23,
+    "reference_0_5": 0.5
+  },
+  "thresholds_chosen_on": "validation",
+  "reference_models": [
+    "logreg",
+    "random_forest",
+    "dummy_prior"
+  ],
+  "model_file_sha256": {
+    "xgboost": "07bbe2633f3c244fbe19c1e1dea5c4ce31c1bd26dd577ceff027dbf8ecfd8bd7",
+    "logreg": "1d5752384fb48ec61a173c0136ef751e7db9be9dded7f7680f8df39b79a92b87",
+    "random_forest": "6e691f15b22630b848328ac0fc0f8531192c3c66b7ece7efbd2c66aa02393068",
+    "dummy_prior": "7f5c237f903e424374d9a041564c20bbbc8b4875d33be4071da65754bdec4772"
+  }
+}

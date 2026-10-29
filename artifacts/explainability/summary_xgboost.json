@@ -1,0 +1,285 @@
+{
+  "model": "xgboost",
+  "model_file_sha256": "07bbe2633f3c244fbe19c1e1dea5c4ce31c1bd26dd577ceff027dbf8ecfd8bd7",
+  "explained_split": "test",
+  "n_clients": 6000,
+  "output_scale": "log-odds (logit of PD)",
+  "base_value_log_odds": -1.2631492614746094,
+  "additivity_max_abs_gap": 2.6588032340235657e-06,
+  "global_importance": [
+    {
+      "feature": "PAY_1",
+      "mean_abs_shap": 0.2508232295513153,
+      "share": 0.1449638307094574,
+      "value_shap_correlation": 0.6747105475586044
+    },
+    {
+      "feature": "months_delayed",
+      "mean_abs_shap": 0.19357340037822723,
+      "share": 0.11187616735696793,
+      "value_shap_correlation": 0.9194503220213514
+    },
+    {
+      "feature": "max_delay",
+      "mean_abs_shap": 0.18034960329532623,
+      "share": 0.10423344373703003,
+      "value_shap_correlation": 0.9086145721842119
+    },
+    {
+      "feature": "recent_delays_3m",
+      "mean_abs_shap": 0.1732807159423828,
+      "share": 0.10014796257019043,
+      "value_shap_correlation": 0.9243108509051174
+    },
+    {
+      "feature": "LIMIT_BAL",
+      "mean_abs_shap": 0.08343013375997543,
+      "share": 0.04821862652897835,
+      "value_shap_correlation": -0.8761903728436994
+    },
+    {
+      "feature": "BILL_AMT1",
+      "mean_abs_shap": 0.07654856145381927,
+      "share": 0.04424140602350235,
+      "value_shap_correlation": -0.3130768808193335
+    },
+    {
+      "feature": "utilization_max",
+      "mean_abs_shap": 0.0640302449464798,
+      "share": 0.03700641915202141,
+      "value_shap_correlation": 0.6642173488707876
+    },
+    {
+      "feature": "PAY_AMT1",
+      "mean_abs_shap": 0.058547720313072205,
+      "share": 0.033837780356407166,
+      "value_shap_correlation": -0.3580094638734884
+    },
+    {
+      "feature": "PAY_AMT2",
+      "mean_abs_shap": 0.05776648968458176,
+      "share": 0.033386267721652985,
+      "value_shap_correlation": -0.3475616696984351
+    },
+    {
+      "feature": "payment_to_bill_ratio",
+      "mean_abs_shap": 0.0565999336540699,
+      "share": 0.03271205350756645,
+      "value_shap_correlation": -0.41691417483418836
+    },
+    {
+      "feature": "utilization_mean",
+      "mean_abs_shap": 0.0530356764793396,
+      "share": 0.030652083456516266,
+      "value_shap_correlation": 0.6476051689377191
+    },
+    {
+      "feature": "PAY_AMT3",
+      "mean_abs_shap": 0.05297195911407471,
+      "share": 0.03061525896191597,
+      "value_shap_correlation": -0.2364520737105417
+    },
+    {
+      "feature": "utilization_1",
+      "mean_abs_shap": 0.04322163760662079,
+      "share": 0.02498003840446472,
+      "value_shap_correlation": 0.7729886593342982
+    },
+    {
+      "feature": "PAY_AMT6",
+      "mean_abs_shap": 0.038973622024059296,
+      "share": 0.022524889558553696,
+      "value_shap_correlation": -0.3839111851169597
+    },
+    {
+      "feature": "bill_trend",
+      "mean_abs_shap": 0.037159331142902374,
+      "share": 0.021476315334439278,
+      "value_shap_correlation": -0.4372510244347345
+    },
+    {
+      "feature": "PAY_AMT4",
+      "mean_abs_shap": 0.027128534391522408,
+      "share": 0.015678994357585907,
+      "value_shap_correlation": -0.12410162306169226
+    },
+    {
+      "feature": "PAY_AMT5",
+      "mean_abs_shap": 0.026949966326355934,
+      "share": 0.015575790777802467,
+      "value_shap_correlation": -0.44001741787992715
+    },
+    {
+      "feature": "PAY_2",
+      "mean_abs_shap": 0.026342418044805527,
+      "share": 0.015224657021462917,
+      "value_shap_correlation": 0.759169212657506
+    },
+    {
+      "feature": "delay_trend",
+      "mean_abs_shap": 0.022198572754859924,
+      "share": 0.012829712592065334,
+      "value_shap_correlation": 0.6063459308385488
+    },
+    {
+      "feature": "BILL_AMT5",
+      "mean_abs_shap": 0.022084565833210945,
+      "share": 0.012763822451233864,
+      "value_shap_correlation": -0.20648144880765665
+    },
+    {
+      "feature": "BILL_AMT2",
+      "mean_abs_shap": 0.02163558453321457,
+      "share": 0.012504332698881626,
+      "value_shap_correlation": -0.22707097883048144
+    },
+    {
+      "feature": "months_paid_duly",
+      "mean_abs_shap": 0.017183834686875343,
+      "share": 0.009931433945894241,
+      "value_shap_correlation": 0.5634424841147191
+    },
+    {
+      "feature": "EDUCATION",
+      "mean_abs_shap": 0.01600230112671852,
+      "share": 0.009248564019799232,
+      "value_shap_correlation": -0.25894080407348063
+    },
+    {
+      "feature": "BILL_AMT3",
+      "mean_abs_shap": 0.015313148498535156,
+      "share": 0.00885026715695858,
+      "value_shap_correlation": -0.09022987658637967
+    },
+    {
+      "feature": "AGE",
+      "mean_abs_shap": 0.013831472024321556,
+      "share": 0.007993929088115692,
+      "value_shap_correlation": 0.4853710270684797
+    },
+    {
+      "feature": "PAY_5",
+      "mean_abs_shap": 0.012694393284618855,
+      "share": 0.007336752023547888,
+      "value_shap_correlation": 0.6694361179277074
+    },
+    {
+      "feature": "BILL_AMT4",
+      "mean_abs_shap": 0.012684328481554985,
+      "share": 0.0073309349827468395,
+      "value_shap_correlation": 0.03051063621256903
+    },
+    {
+      "feature": "payment_1_to_limit",
+      "mean_abs_shap": 0.011406004428863525,
+      "share": 0.006592124700546265,
+      "value_shap_correlation": 0.20004318877797958
+    },
+    {
+      "feature": "PAY_3",
+      "mean_abs_shap": 0.011130105704069138,
+      "share": 0.006432668771594763,
+      "value_shap_correlation": 0.8481239271468155
+    },
+    {
+      "feature": "PAY_6",
+      "mean_abs_shap": 0.01079269964247942,
+      "share": 0.006237664259970188,
+      "value_shap_correlation": 0.17867590656477045
+    },
+    {
+      "feature": "MARRIAGE",
+      "mean_abs_shap": 0.009679464623332024,
+      "share": 0.005594267509877682,
+      "value_shap_correlation": -0.8678184552239119
+    },
+    {
+      "feature": "BILL_AMT6",
+      "mean_abs_shap": 0.008786815218627453,
+      "share": 0.005078359041363001,
+      "value_shap_correlation": 0.4112633478305194
+    },
+    {
+      "feature": "months_zero_bill",
+      "mean_abs_shap": 0.006691288203001022,
+      "share": 0.0038672443479299545,
+      "value_shap_correlation": 0.49803466763328824
+    },
+    {
+      "feature": "PAY_4",
+      "mean_abs_shap": 0.006412608548998833,
+      "share": 0.0037061809562146664,
+      "value_shap_correlation": 0.7607126245344547
+    },
+    {
+      "feature": "SEX",
+      "mean_abs_shap": 0.005905746016651392,
+      "share": 0.003413238562643528,
+      "value_shap_correlation": -0.7903764581453888
+    },
+    {
+      "feature": "inactive_account",
+      "mean_abs_shap": 0.0026208260096609592,
+      "share": 0.001514711999334395,
+      "value_shap_correlation": 0.9192239550238381
+    },
+    {
+      "feature": "months_negative_bill",
+      "mean_abs_shap": 0.0024600361939519644,
+      "share": 0.0014217832358554006,
+      "value_shap_correlation": -0.6094335515335608
+    }
+  ],
+  "grouped_importance": [
+    {
+      "group": "Delay history (engineered)",
+      "features": 5,
+      "mean_abs_shap": 0.5355103611946106,
+      "share": 0.3719586332252907
+    },
+    {
+      "group": "Repayment status (PAY_1..6)",
+      "features": 6,
+      "mean_abs_shap": 0.28010234236717224,
+      "share": 0.19455549692386487
+    },
+    {
+      "group": "Utilisation & ratios (engineered)",
+      "features": 6,
+      "mean_abs_shap": 0.19926346838474274,
+      "share": 0.13840585117116827
+    },
+    {
+      "group": "Payment amounts (PAY_AMT1..6)",
+      "features": 6,
+      "mean_abs_shap": 0.18059684336185455,
+      "share": 0.12544025268124612
+    },
+    {
+      "group": "Bill amounts (BILL_AMT1..6)",
+      "features": 6,
+      "mean_abs_shap": 0.12414011359214783,
+      "share": 0.08622613179166316
+    },
+    {
+      "group": "Credit limit",
+      "features": 1,
+      "mean_abs_shap": 0.08343013375997543,
+      "share": 0.05794950158188641
+    },
+    {
+      "group": "Demographics (SEX, EDUCATION, MARRIAGE, AGE)",
+      "features": 4,
+      "mean_abs_shap": 0.027341563254594803,
+      "share": 0.018991099398590432
+    },
+    {
+      "group": "Balance patterns (engineered)",
+      "features": 3,
+      "mean_abs_shap": 0.009319252334535122,
+      "share": 0.006473033226290019
+    }
+  ],
+  "created_utc": "2026-10-29T22:34:08+00:00",
+  "interpretation": "Predictive associations learned by the model, not causal effects."
+}
